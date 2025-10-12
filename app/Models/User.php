@@ -12,6 +12,20 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    public $incrementing = false;
+    protected $keyType = 'string';
+
+    const LEVEL_USER = 1;
+    const LEVEL_ADMIN = 2;
+
+    public function bookshelves() {
+        return $this->hasMany(Bookshelf::class, 'user_id');
+    }
+
+    public function reviews() {
+        return $this->hasMany(Review::class, 'user_id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -20,7 +34,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'status',
         'password',
+        'level'
     ];
 
     /**

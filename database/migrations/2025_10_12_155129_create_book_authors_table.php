@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reviews', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
+        Schema::create('book_authors', function (Blueprint $table) {
             $table->foreignUuid('book_id')->constrained('books')->onDelete('cascade');
+            $table->foreignUuid('author_id')->constrained('authors')->onDelete('cascade');
 
-            $table->tinyInteger('stars');
-            $table->text('comment')->nullable();
-            $table->timestamps();
+            $table->primary(['book_id', 'author_id']);
         });
     }
 
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reviews');
+        Schema::dropIfExists('book_authors');
     }
 };

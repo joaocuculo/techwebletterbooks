@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('isbn', length: 13)->unique()->nullable();
+            $table->string('isbn')->unique()->nullable();
             $table->enum('status', ['ativo', 'inativo'])->default('ativo');
-            $table->string('title', length: 200);
-            $table->string('publisher', length: 200)->nullable();
+            $table->string('title');
+            $table->string('publisher')->nullable();
             $table->integer('page_count')->nullable();
             $table->string('cover_url')->nullable();
             $table->timestamps();

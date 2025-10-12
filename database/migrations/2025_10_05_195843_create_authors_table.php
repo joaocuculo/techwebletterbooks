@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('authors', function (Blueprint $table) {
-            $table->id();
+            $table->uuid()->primary();
+            $table->enum('status', ['ativo', 'inativo'])->default('ativo');
+            $table->string('name');
             $table->timestamps();
         });
     }
