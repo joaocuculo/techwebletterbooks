@@ -19,7 +19,45 @@
             </style>
         @endif
     </head>
-    <body class="bg-blue-500">
-        <h1>Teste</h1>
-    </body>
+   <body class="bg-gray-100 min-h-screen">
+
+    <div class="max-w-6xl mx-auto py-10 px-6">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+            📚 Resultados da busca - Google Books API
+        </h1>
+
+        @if(isset($posts['items']) && count($posts['items']) > 0)
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                @foreach($posts['items'] as $book)
+                    @php
+                        $info = $book['volumeInfo'] ?? [];
+                        $title = $info['title'] ?? 'Título não disponível';
+                        $authors = isset($info['authors']) ? implode(', ', $info['authors']) : 'Autor desconhecido';
+                        $thumbnail = $info['imageLinks']['thumbnail'] ?? 'https://via.placeholder.com/128x192?text=Sem+Imagem';
+                        $preview = $info['previewLink'] ?? '#';
+                        $publishedDate = $info['publishedDate'] ?? 'Data não disponível';
+                    @endphp
+
+                    <div class="bg-white shadow-md rounded-2xl overflow-hidden hover:shadow-xl transition transform hover:-translate-y-1">
+                        <img src="{{ $thumbnail }}" alt="{{ $title }}" class="w-full h-72 object-cover">
+
+                        <div class="p-4">
+                            <h2 class="text-lg font-semibold text-gray-900 mb-1">{{ $title }}</h2>
+                            <p class="text-gray-600 text-sm mb-2">👤 {{ $authors }}</p>
+                            <p class="text-gray-500 text-xs mb-4">📅 {{ $publishedDate }}</p>
+
+                            <a href="{{ $preview }}" target="_blank"
+                               class="inline-block px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 text-sm">
+                                Ver no Google Books
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <p class="text-center text-gray-600 text-lg">Nenhum livro encontrado.</p>
+        @endif
+    </div>
+
+</body>
 </html>
