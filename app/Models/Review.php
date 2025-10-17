@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Review extends Model
 {
+    use HasUuids;
+
     public $incrementing = false;
     protected $keyType = 'string';
 
@@ -16,11 +20,11 @@ class Review extends Model
         'comment'
     ];
 
-    public function user() {
+    public function user(): BelongsTo {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function book() {
+    public function book(): BelongsTo {
         return $this->belongsTo(Book::class, 'book_id');
     }
 }
