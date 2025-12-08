@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
+use GuzzleHttp\RetryMiddleware;
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 
 class AuthorController extends Controller
@@ -11,7 +14,8 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //
+        $authors = Author::all();
+        return view('authors.index')->with('authors', $authors);
     }
 
     /**
@@ -19,7 +23,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        return view('authors.create');
     }
 
     /**
@@ -27,7 +31,11 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Author::create([
+            'name' => $request->name
+        ]);
+
+        return redirect()->route('authors.index');
     }
 
     /**
@@ -35,7 +43,8 @@ class AuthorController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $author = Author::find($id);
+        return view('authors.show')->with('author', $author);
     }
 
     /**
@@ -43,7 +52,8 @@ class AuthorController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $author = Author::find($id);
+        return view('authors.edit')->with('author', $author);
     }
 
     /**
@@ -51,7 +61,14 @@ class AuthorController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $author = Author::find($id);
+
+        $author->update([
+            'name' => $request->name,
+            'status' => $request->status
+        ]);
+
+        return redirect()->route('authors.show', $author->id);
     }
 
     /**
@@ -59,6 +76,9 @@ class AuthorController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $author = Author::find($id);
+
+        $author->delete();
+        return redirect()->route('authors.index');
     }
 }

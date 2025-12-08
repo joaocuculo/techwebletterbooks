@@ -14,7 +14,7 @@
         {{-- Navigation --}}
         <nav>
             <ul class="flex flex-row space-x-10">
-                <li><a href="#" class="uppercase text-xs font-semibold tracking-[0.2rem] transition duration-200 hover:text-slate-50/70">Início</a></li>
+                <li><a href="{{ route('books.index') }}" class="uppercase text-xs font-semibold tracking-[0.2rem] transition duration-200 hover:text-slate-50/70">Início</a></li>
                 <li><a href="#" class="uppercase text-xs font-semibold tracking-[0.2rem] transition duration-200 hover:text-slate-50/70">Sobre</a></li>
                 <li><a href="#" class="uppercase text-xs font-semibold tracking-[0.2rem] transition duration-200 hover:text-slate-50/70">Estantes</a></li>
             </ul>
@@ -28,10 +28,11 @@
     </div>
 </header>
 
-<main class="flex flex-col flex-1 w-full">
+<main class="flex flex-col flex-1 w-full bg-slate-100">
     @yield('content')
 </main>
 
+{{-- Footer --}}
 <footer class="bg-primary-dark text-slate-50 flex flex-row justify-center items-center w-full">
     <div class="flex flex-col max-w-6xl divide-y divide-white/30 w-full">
         <div class="flex flex-row py-5 justify-between items-center">
