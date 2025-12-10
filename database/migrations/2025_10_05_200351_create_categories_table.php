@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->enum('satus', ['ativo', 'inativo'])->default('ativo');
+            $table->enum('status', ['ativo', 'inativo'])->default('ativo');
             $table->string('name');
             $table->timestamps();
         });

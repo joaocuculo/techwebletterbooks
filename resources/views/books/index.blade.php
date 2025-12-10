@@ -3,7 +3,8 @@
 @section('content')
 
 <div class="flex flex-col">
-    <h1>teste</h1>
+    <a href="{{ route('authors.index') }}">Autores</a>
+    <a href="{{ route('categories.index') }}">Categorias</a>
 </div>
 
 @endsection
