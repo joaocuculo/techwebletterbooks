@@ -16,16 +16,23 @@
 
     {{-- Content --}}
     <section class="max-w-6xl w-full flex flex-col">
+        <div>
+            <h1 class="text-lg font-bold tracking-widest uppercase">Livros</h1>
+        </div>
         <div class="flex flex-row gap-4 flex-wrap">
             @foreach ($books as $book)
-            <a href="{{ route('books.show', $book->id) }}" class="flex flex-col border rounded-md px-4 py-3">
+            <a href="{{ route('books.show', $book->id) }}" class="flex flex-col border border-slate-400 shadow-lg rounded-md px-4 py-3">
                 <span class="text-base">{{ $book->title }}</span>
-                @foreach ($book->authors as $author)
-                    <span class="text-sm">{{ $author->name }}</span>
-                @endforeach
-                @foreach ($book->categories as $category)
-                    <span class="text-sm">{{ $category->name }}</span>
-                @endforeach
+                <div class="flex flex-row gap-1">
+                    @foreach ($book->authors as $author)
+                    <span class="text-sm">{{ $author->name }}@if (!$loop->last), @endif</span>
+                    @endforeach
+                </div>
+                <div class="flex flex-row gap-1">
+                    @foreach ($book->categories as $category)
+                    <span class="text-sm">{{ $category->name }}@if (!$loop->last), @endif</span>
+                    @endforeach
+                </div>
             </a>
             @endforeach
         </div>
