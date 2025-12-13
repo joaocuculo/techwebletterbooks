@@ -12,6 +12,9 @@ Route::prefix('books')->controller(BookController::class)->group(function() {
     Route::get('/create', 'create')->name('books.create');
     Route::get('/show/{id}', 'show')->name('books.show');
     Route::get('/edit/{id}', 'edit')->name('books.edit');
+    Route::post('/store', 'store')->name('books.store');
+    Route::put('/update/{id}', 'update')->name('books.update');
+    Route::delete('/delete/{id}', 'destroy')->name('books.delete');
 });
 
 Route::prefix('authors')->controller(AuthorController::class)->group(function() {
@@ -33,6 +36,3 @@ Route::prefix('categories')->controller(BookCategoryController::class)->group(fu
     Route::put('/update/{id}', 'update')->name('categories.update');
     Route::delete('/delete/{id}', 'destroy')->name('categories.delete');
 });
-
-
-Route::get('/teste', [APIController::class, 'searchBooks']);
