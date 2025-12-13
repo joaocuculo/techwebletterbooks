@@ -12,13 +12,39 @@
             </a>
         </div>
         <div class="flex flex-row w-full justify-end items-center">
-            <a href="{{ route('authors.create') }}" class="bg-primary text-slate-50 px-5 py-2 rounded-md w-fit hover:bg-primary-light cursor-pointer transition duration-200 shadow">Adicionar livro</a>
+            <a href="{{ route('authors.create') }}" class="bg-primary text-slate-50 px-5 py-2 rounded-md w-fit hover:bg-primary-light cursor-pointer transition duration-200 shadow">
+                Adicionar autor
+            </a>
         </div>
     </section>
+
+    {{-- Content --}}
     <section class="max-w-6xl w-full flex flex-col">
-        @foreach ($authors as $author)
-            <a href="{{ route('authors.show', $author->id) }}">{{ $author->name }}</a>
-        @endforeach
+        <div>
+            <h1 class="text-lg font-bold ml-5 tracking-widest uppercase">Autores</h1>
+        </div>
+        <table class="bg-slate-200 rounded-xl shadow-2xl overflow-hidden">
+            <tr class="bg-slate-300">
+                <th class="py-2 border-r border-b border-slate-400">Nome</th>
+                <th class="py-2 border-r border-b border-slate-400">Status</th>
+                <th class="py-2 border-b border-slate-400">Ação</th>
+            </tr>
+            @foreach ($authors as $author)
+                <tr>
+                    <td class="w-3/5 px-5 py-2 border-b border-slate-300">
+                        {{ $author->name }}
+                    </td>
+                    <td class="w-1/5 text-center border-b border-slate-300">
+                        {{ ucfirst($author->status) }}
+                    </td>
+                    <td class="w-1/5 text-center border-b border-slate-300">
+                        <a href="{{ route('authors.show', $author->id) }}" class="underline hover:text-primary-light">
+                            Ver detalhes
+                        </a>
+                    </td>
+                </tr>
+            @endforeach
+        </table>
     </section>
 </div>
 

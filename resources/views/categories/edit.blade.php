@@ -1,28 +1,41 @@
 @extends('layouts.app')
 
 @section('content')
-    
-<div>
-    <div>
-        <a href="{{ route('categories.show', $category->id) }}">Voltar</a>
-    </div>
-    <form action="{{ route('categories.update', $category->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <div>
-            <label for="name">Nome da Categoria</label>
-            <input class="border border-black" type="text" name="name" id="name" value="{{ $category->name }}" required>
-        </div>
-        <div>
-            <label for="status">Status</label>
-            <select name="status" id="status">
-                <option value="ativo" {{ $category->status === 'ativo' ? 'selected' : '' }}>Ativo</option>
-                <option value="inativo" {{ $category->status === 'inativo' ? 'selected' : '' }}>Inativo</option>
-            </select>
-        </div>
 
-        <button type="submit" class="bg-slate-300 cursor-pointer">Salvar</button>
-    </form>
+<div class="flex flex-col justify-center items-center w-full py-5 gap-5">
+    {{-- Navigation --}}
+    <section class="max-w-6xl w-full flex flex-row justify-between items-center">
+        <div class="flex flex-row gap-3">
+            <a href="{{ route('categories.show', $category->id) }}" class="underline hover:text-primary-light inline-flex items-center">
+                <x-heroicon-m-arrow-small-left class="h-5 w-5" />
+                Voltar
+            </a>
+        </div>
+    </section>
+
+    {{-- Content --}}
+    <section class="max-w-6xl w-full flex flex-col">
+        <div>
+            <h1 class="text-lg font-bold tracking-widest uppercase">Editar Categoria</h1>
+        </div>
+        <form action="{{ route('categories.update', $category->id) }}" method="POST" class="flex flex-col gap-2">
+            @csrf
+            @method('PUT')
+
+            <div class="flex flex-col">
+                <label for="name">Nome da Categoria</label>
+                <input class="max-w-96 w-full border border-slate-400 rounded-sm shadow py-0.5 px-2" value="{{ $category->name }}" type="text" name="name" id="name" required>
+            </div>
+            <div class="flex flex-col">
+                <label for="status">Status</label>
+                <select name="status" id="status" class="max-w-96 w-full border border-slate-400 rounded-sm shadow py-0.5 px-2">
+                    <option value="ativo" {{ $category->status === 'ativo' ? 'selected' : '' }}>Ativo</option>
+                    <option value="inativo" {{ $category->status === 'inativo' ? 'selected' : '' }}>Inativo</option>
+                </select>
+            </div>
+            <button type="submit" class="bg-primary text-slate-50 px-3 py-0.5 rounded-md w-fit hover:bg-primary-light cursor-pointer transition duration-200 shadow">Salvar</button>
+        </form>
+    </section>
 </div>
 
 @endsection
